@@ -32,6 +32,7 @@ class _HomepageState extends State<Homepage> {
   String texttodisplay = "";
   late String result; //stores intermediate result
   late String operationtoperform;
+  String test = "";;
 
   void btnclicked(String btntext) {
     if (btntext == "C") {
