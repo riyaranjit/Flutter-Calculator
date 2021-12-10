@@ -138,6 +138,7 @@ class _HomepageState extends State<Homepage> {
                 custombutton("0"),
                 custombutton("="),
                 custombutton("/"),
+                custombutton("/"),
               ],
             )
           ],
