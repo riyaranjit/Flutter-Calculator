@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,69 +14,69 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Calculator',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: homepage(),
+      home: Homepage(),
     );
   }
 }
 
-class homepage extends StatefulWidget {
-  const homepage({Key? key}) : super(key: key);
+class Homepage extends StatefulWidget {
+  const Homepage({Key? key}) : super(key: key);
 
   @override
-  _homepageState createState() => _homepageState();
+  _HomepageState createState() => _HomepageState();
 }
 
-class _homepageState extends State<homepage> {
-  int firnum;
-  int secnum;
-  String texttodisplay="",
-  String res; //stores intermediate result
-  String operationtoperform;
+class _HomepageState extends State<Homepage> {
+  late int firnum;
+  late int secnum;
+  String texttodisplay = "";
+  late String result; //stores intermediate result
+  late String operationtoperform;
 
   void btnclicked(String btntext) {
-    if(btntext=="C"){
-      texttodisplay="";
-      firnum=0;
-      secnum=0;
-      res="";
-
-    }
-    else if (btntext=="+" || btntext=="-" || btntext=="x" || btntext=="/"){
-      firnum= int.parse(texttodisplay);
-      res="";
-      operationtoperform= btntext;
-    }
-    else if (btntext == "="){
-      secnum=int.parse(texttodisplay);
-      if(operationtoperform=="+"){
-        res= (firnum+ secnum).toString();
+    if (btntext == "C") {
+      texttodisplay = "";
+      firnum = 0;
+      secnum = 0;
+      result = "";
+    } else if (btntext == "+" ||
+        btntext == "-" ||
+        btntext == "x" ||
+        btntext == "/") {
+      firnum = int.parse(texttodisplay);
+      result = "";
+      operationtoperform = btntext;
+    } else if (btntext == "=") {
+      secnum = int.parse(texttodisplay);
+      if (operationtoperform == "+") {
+        result = (firnum + secnum).toString();
       }
-      if(operationtoperform=="-"){
-        res= (firnum- secnum).toString();
+      if (operationtoperform == "-") {
+        result = (firnum - secnum).toString();
       }
-      if(operationtoperform=="x"){
-        res= (firnum * secnum).toString();
+      if (operationtoperform == "x") {
+        result = (firnum * secnum).toString();
       }
-      if(operationtoperform=="/"){
-        res= (firnum ~/ secnum).toString();
-      }
-      else{
-        res= int.parse(texttodisplay+ btntext).toString();
+      if (operationtoperform == "/") {
+        result = (firnum ~/ secnum).toString();
+      } else {
+        result = int.parse(texttodisplay + btntext).toString();
       }
       setState(() {
-        res;
+        texttodisplay = result;
       });
     }
   }
 
   Widget custombutton(String btnval) {
     return Expanded(
+      // ignore: deprecated_member_use
       child: OutlineButton(
         padding: EdgeInsets.all(25.0),
         onPressed: () => btnclicked(btnval),
         child: Text(
-          '$texttodisplay ',
-          style:  TextStyle(
+          "$btnval",
+          style: TextStyle(
             fontSize: 25.0,
           ),
         ),
@@ -86,7 +88,7 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Calculator'),
+        title: Text('Calculator'),
       ),
       body: Container(
         child: Column(
